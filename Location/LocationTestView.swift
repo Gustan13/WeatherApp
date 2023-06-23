@@ -18,8 +18,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-
-   
     
     var statusString: String {
         guard let status = locationStatus else {
@@ -43,15 +41,20 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if locationStatus == .authorizedWhenInUse  || locationStatus == .authorizedAlways {
-            print("oi")
-            locationManager.requestLocation()
-            
-        }
+//        if locationStatus == .authorizedWhenInUse  || locationStatus == .authorizedAlways {
+//            locationManager.requestLocation()
+//            
+//        }
         guard let location = locations.last else { return }
         lastLocation = location
         fetchCountryAndCity(for: locations.last)
+        print("oi")
 //        print(#function, location)
+    }
+    
+    func stop()
+    {
+        locationManager.stopUpdatingLocation()
     }
     
     func fetchCountryAndCity(for location: CLLocation?) {

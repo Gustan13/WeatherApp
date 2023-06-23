@@ -12,18 +12,19 @@ class WeatherManager : ObservableObject
 {
     let weatherService = WeatherService.shared
     
-    @Published var currentWeather = WeatherModel("--Fº", "square.dotted", "", "")
-    @Published var morningWeather = WeatherModel("--Fº", "square.dotted", "", "")
-    @Published var eveningWeather = WeatherModel("--Fº", "square.dotted", "", "")
-    @Published var nightWeather = WeatherModel("--Fº", "square.dotted", "", "")
+    @Published var currentWeather = WeatherModel("--Cº", "square.dotted", "", "")
+    @Published var morningWeather = WeatherModel("--Cº", "square.dotted", "", "")
+    @Published var eveningWeather = WeatherModel("--Cº", "square.dotted", "", "")
+    @Published var nightWeather = WeatherModel("--Cº", "square.dotted", "", "")
     
-    func get_weather() async
+    func get_weather(lat: CLLocationDegrees, long: CLLocationDegrees) async
     {
         do {
-            let weather = try await weatherService.weather(for: CLLocation(latitude: -25.480877, longitude: -49.304424))
-            let morning = weather.hourlyForecast.forecast[7]
-            let evening = weather.hourlyForecast.forecast[14]
-            let night = weather.hourlyForecast.forecast[18]
+            let weather = try await weatherService.weather(for: CLLocation(latitude: lat, longitude: long))
+            let sunrise = weather.hourlyForecast.forecast[0]
+            let morning = weather.hourlyForecast.forecast[9]
+            let evening = weather.hourlyForecast.forecast[16]
+            let night = weather.hourlyForecast.forecast[20]
             
             DispatchQueue.main.async {
                 self.currentWeather.temperature = weather.currentWeather.apparentTemperature.formatted()
@@ -46,6 +47,8 @@ class WeatherManager : ObservableObject
                 self.nightWeather.precipitation = night.precipitation.description
                 self.nightWeather.wind = night.wind.speed.description
             }
+            
+            print(sunrise)
         }
         catch
         {

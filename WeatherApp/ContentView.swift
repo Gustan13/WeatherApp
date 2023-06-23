@@ -12,12 +12,20 @@ import CoreLocation
 struct ContentView: View {
     
     @StateObject var wm = WeatherManager()
+    @StateObject var lm = LocationManager()
+    
+    @State var flag = false
     
     var body: some View {
         VStack {
             Text("WeatherApp")
                 .font(.largeTitle)
+            Text("\(lm.currentPlacemark?.subAdministrativeArea ?? "")")
                 .padding(.bottom)
+            Text("\(lm.lastLocation?.coordinate.latitude ?? 0), \(lm.lastLocation?.coordinate.longitude ?? 0)")
+            
+            Text("\(wm.currentWeather.temperature)")
+            
             VStack {
                 Text("Manhã")
                 Text(wm.morningWeather.temperature)
@@ -51,7 +59,18 @@ struct ContentView: View {
         }
         .padding()
         .task {
-            await wm.get_weather()
+            if (lm.locationStatus == .none)
+            {
+                return
+            }
+            
+            if (lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse)
+            {
+                print("in")
+                await wm.get_weather(lat: lm.lastLocation?.coordinate.latitude ?? -25, long: lm.lastLocation?.coordinate.longitude ?? -49)
+                lm.stop()
+                print("flag")
+            }
         }
     }
 }
