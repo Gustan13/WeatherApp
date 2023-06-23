@@ -9,56 +9,49 @@ import SwiftUI
 import WeatherKit
 import CoreLocation
 
-struct CurrentWeather
-{
-    var temperature: String
-    var symbolName: String
-}
-
-class WeatherManager : ObservableObject
-{
-    var currentWeather : CurrentWeather!
-    private let weatherService = WeatherService()
-    
-    func getWeather() async
-    {
-        let syracuse = CLLocation(latitude: -25, longitude: -49)
-        
-        let weather = try? await weatherService.weather(for: syracuse)
-        if let weather = weather
-        {
-            let temperature = weather.currentWeather.temperature
-            let symbol = weather.currentWeather.symbolName
-            currentWeather = CurrentWeather(temperature: temperature.formatted(), symbolName: symbol)
-        }
-        currentWeather = CurrentWeather(temperature: "--Cº", symbolName: "square.dotted")
-    }
-}
-
 struct ContentView: View {
     
-    @State var currentWeather = CurrentWeather(temperature: "--Fº", symbolName: "square.dotted")
-    let weatherService = WeatherService.shared
+    @StateObject var wm = WeatherManager()
     
     var body: some View {
         VStack {
-            Text(currentWeather.temperature)
+            Text("WeatherApp")
                 .font(.largeTitle)
-                .padding()
-            Image(systemName: currentWeather.symbolName)
-                .font(.largeTitle)
+                .padding(.bottom)
+            VStack {
+                Text("Manhã")
+                Text(wm.morningWeather.temperature)
+                    .font(.largeTitle)
+                Image(systemName: wm.morningWeather.symbolName)
+                    .font(.largeTitle)
+                Text(wm.morningWeather.precipitation)
+                Text(wm.morningWeather.wind)
+                    .padding(.bottom)
+            }
+            VStack {
+                Text("Tarde")
+                Text(wm.eveningWeather.temperature)
+                    .font(.largeTitle)
+                Image(systemName: wm.eveningWeather.symbolName)
+                    .font(.largeTitle)
+                Text(wm.eveningWeather.precipitation)
+                Text(wm.eveningWeather.wind)
+                    .padding(.bottom)
+            }
+            VStack {
+                Text("Noite")
+                Text(wm.nightWeather.temperature)
+                    .font(.largeTitle)
+                Image(systemName: wm.nightWeather.symbolName)
+                    .font(.largeTitle)
+                Text(wm.nightWeather.precipitation)
+                Text(wm.nightWeather.wind)
+                    .padding(.bottom)
+            }
         }
         .padding()
         .task {
-            do {
-                let weather = try await weatherService.weather(for: CLLocation(latitude: -25, longitude: -49))
-                currentWeather.temperature = weather.currentWeather.temperature.formatted()
-                currentWeather.symbolName = weather.currentWeather.symbolName
-            }
-            catch
-            {
-                print(error)
-            }
+            await wm.get_weather()
         }
     }
 }
