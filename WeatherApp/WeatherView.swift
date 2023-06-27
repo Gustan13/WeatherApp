@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct WeatherView: View {
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d 'de' MMM"
+        formatter.locale = Locale(identifier: "pt_BR")
+        return formatter
+    }()
+    
     @StateObject var wm = WeatherManager()
     @StateObject var lm = LocationManager()
     
@@ -15,9 +23,12 @@ struct WeatherView: View {
     @State var weatherKitError = false
     
     var body: some View {
+        let currentDate = Date()
+        let dateString = WeatherView.dateFormatter.string(from: currentDate)
+        
         VStack (spacing: 16) {
             HStack() {
-                Text("Hoje, 23 de jun.")
+                Text("Hoje, \(dateString)")
                     .font(.title2)
                     .fontWeight(.bold)
                

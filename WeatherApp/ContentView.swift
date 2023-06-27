@@ -33,7 +33,7 @@ struct ContentView: View {
                     .font(.largeTitle)
                 Image(systemName: wm.morningWeather.symbolName)
                     .font(.largeTitle)
-                Text(wm.morningWeather.precipitation)
+                Text(wm.morningWeather.precipitation.description)
                 Text(wm.morningWeather.wind.formatted())
                     .padding(.bottom)
             }
@@ -43,7 +43,7 @@ struct ContentView: View {
                     .font(.largeTitle)
                 Image(systemName: wm.eveningWeather.symbolName)
                     .font(.largeTitle)
-                Text(wm.eveningWeather.precipitation)
+                Text(wm.eveningWeather.precipitation.description)
                 Text(wm.eveningWeather.wind.formatted())
                     .padding(.bottom)
             }
@@ -53,7 +53,7 @@ struct ContentView: View {
                     .font(.largeTitle)
                 Image(systemName: wm.nightWeather.symbolName)
                     .font(.largeTitle)
-                Text(wm.nightWeather.precipitation)
+                Text(wm.nightWeather.precipitation.description)
                 Text(wm.nightWeather.wind.formatted())
                     .padding(.bottom)
             }

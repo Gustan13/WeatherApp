@@ -21,6 +21,8 @@
 		52F785042A49CAC100A8121E /* CardMinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F785012A49CAC100A8121E /* CardMinView.swift */; };
 		52F785052A49CAC100A8121E /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F785022A49CAC100A8121E /* WeatherView.swift */; };
 		52F785082A49D2B100A8121E /* QuoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F785072A49D2B100A8121E /* QuoteModel.swift */; };
+		52F7850C2A4B115700A8121E /* WindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7850B2A4B115700A8121E /* WindModel.swift */; };
+		52F7850E2A4B13C900A8121E /* RainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7850D2A4B13C900A8121E /* RainModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		52F785012A49CAC100A8121E /* CardMinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardMinView.swift; sourceTree = "<group>"; };
 		52F785022A49CAC100A8121E /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		52F785072A49D2B100A8121E /* QuoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteModel.swift; sourceTree = "<group>"; };
+		52F7850B2A4B115700A8121E /* WindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindModel.swift; sourceTree = "<group>"; };
+		52F7850D2A4B13C900A8121E /* RainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 			children = (
 				52713C572A45C9DD0060B2E4 /* WeatherModel.swift */,
 				52F785072A49D2B100A8121E /* QuoteModel.swift */,
+				52F7850B2A4B115700A8121E /* WindModel.swift */,
+				52F7850D2A4B13C900A8121E /* RainModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -301,6 +307,8 @@
 				52F785052A49CAC100A8121E /* WeatherView.swift in Sources */,
 				52713C5A2A45CE1E0060B2E4 /* LocationTestView.swift in Sources */,
 				527C0FD52A431C5600C1138D /* ContentView.swift in Sources */,
+				52F7850E2A4B13C900A8121E /* RainModel.swift in Sources */,
+				52F7850C2A4B115700A8121E /* WindModel.swift in Sources */,
 				52713C582A45C9DD0060B2E4 /* WeatherModel.swift in Sources */,
 				52F785082A49D2B100A8121E /* QuoteModel.swift in Sources */,
 				52F785042A49CAC100A8121E /* CardMinView.swift in Sources */,

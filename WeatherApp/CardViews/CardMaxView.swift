@@ -20,7 +20,7 @@ struct CardMaxView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.black)
                 
-                Text("A partir das 0h")
+                Text("A partir das 7h")
                 .font(.footnote)
                   .foregroundColor(Color(uiColor: .systemGray))
             Spacer()
@@ -78,7 +78,7 @@ struct CardMaxView: View {
                         
                         .foregroundColor(Color(uiColor: .secondaryLabel))
                     
-                        Text("\(weatherModel.precipitation)")
+                        Text(get_rainphrase(rain: weatherModel.precipitation.value))
                         .font(.footnote)
                         .fontWeight(.bold)
                 }
@@ -99,7 +99,7 @@ struct CardMaxView: View {
                             
                                 .foregroundColor(Color(uiColor: .secondaryLabel))
                             
-                            Text("\(weatherModel.wind.formatted())")
+                            Text(get_windphrase(wind: weatherModel.wind.value))
                                 .font(.footnote)
                                 .fontWeight(.bold)
                         }

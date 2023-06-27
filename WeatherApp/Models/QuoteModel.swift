@@ -5,8 +5,6 @@
 //  Created by Gustavo Binder on 26/06/23.
 //
 
-
-
 var temperaturas = [6, 11.9, 17.9, 24, 27, 32.9]
 var frases = ["congelante", "muito frio", "frio", "ameno", "quente", "muito quente", "extremamente quente"]
 
@@ -38,7 +36,7 @@ func make_quote(_ weatherModel : WeatherModel) -> String
     
     var chuva : String
     {
-        if (weatherModel.precipitation == "")
+        if (weatherModel.precipitation.value < 0.1)
         {
             return ""
         }
@@ -55,8 +53,6 @@ func make_quote(_ weatherModel : WeatherModel) -> String
         {
             aux = ((weatherModel.temperature.value - 32) * 5) / 9
         }
-        
-        print("\(weatherModel.temperature.value)")
         
         return get_phrase(aux)
     }
