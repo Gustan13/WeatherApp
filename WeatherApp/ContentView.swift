@@ -15,6 +15,7 @@ struct ContentView: View {
     @StateObject var lm = LocationManager()
     
     @State var flag = false
+    @State var weatherKitError = false
     
     var body: some View {
         VStack {
@@ -28,34 +29,38 @@ struct ContentView: View {
             
             VStack {
                 Text("Manhã")
-                Text(wm.morningWeather.temperature)
+                Text(wm.morningWeather.temperature.formatted())
                     .font(.largeTitle)
                 Image(systemName: wm.morningWeather.symbolName)
                     .font(.largeTitle)
                 Text(wm.morningWeather.precipitation)
-                Text(wm.morningWeather.wind)
+                Text(wm.morningWeather.wind.formatted())
                     .padding(.bottom)
             }
             VStack {
                 Text("Tarde")
-                Text(wm.eveningWeather.temperature)
+                Text(wm.eveningWeather.temperature.formatted())
                     .font(.largeTitle)
                 Image(systemName: wm.eveningWeather.symbolName)
                     .font(.largeTitle)
                 Text(wm.eveningWeather.precipitation)
-                Text(wm.eveningWeather.wind)
+                Text(wm.eveningWeather.wind.formatted())
                     .padding(.bottom)
             }
             VStack {
                 Text("Noite")
-                Text(wm.nightWeather.temperature)
+                Text(wm.nightWeather.temperature.formatted())
                     .font(.largeTitle)
                 Image(systemName: wm.nightWeather.symbolName)
                     .font(.largeTitle)
                 Text(wm.nightWeather.precipitation)
-                Text(wm.nightWeather.wind)
+                Text(wm.nightWeather.wind.formatted())
                     .padding(.bottom)
             }
+        }
+        .alert(isPresented: $weatherKitError)
+        {
+            Alert(title: Text("Error"), message: Text("WeatherKit could not be accessed."), dismissButton: .default(Text("Ok")))
         }
         .padding()
         .task {
@@ -67,7 +72,7 @@ struct ContentView: View {
             if (lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse)
             {
                 print("in")
-                await wm.get_weather(lat: lm.lastLocation?.coordinate.latitude ?? -25, long: lm.lastLocation?.coordinate.longitude ?? -49)
+                weatherKitError = await wm.get_weather(lat: lm.lastLocation?.coordinate.latitude ?? -25, long: lm.lastLocation?.coordinate.longitude ?? -49)
                 lm.stop()
                 print("flag")
             }

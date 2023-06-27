@@ -17,6 +17,10 @@
 		527C0FE42A431C5700C1138D /* WeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C0FE32A431C5700C1138D /* WeatherAppTests.swift */; };
 		527C0FEE2A431C5700C1138D /* WeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C0FED2A431C5700C1138D /* WeatherAppUITests.swift */; };
 		527C0FF02A431C5700C1138D /* WeatherAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C0FEF2A431C5700C1138D /* WeatherAppUITestsLaunchTests.swift */; };
+		52F785032A49CAC100A8121E /* CardMaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F785002A49CAC100A8121E /* CardMaxView.swift */; };
+		52F785042A49CAC100A8121E /* CardMinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F785012A49CAC100A8121E /* CardMinView.swift */; };
+		52F785052A49CAC100A8121E /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F785022A49CAC100A8121E /* WeatherView.swift */; };
+		52F785082A49D2B100A8121E /* QuoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F785072A49D2B100A8121E /* QuoteModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		527C0FED2A431C5700C1138D /* WeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITests.swift; sourceTree = "<group>"; };
 		527C0FEF2A431C5700C1138D /* WeatherAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		527C0FFC2A432DB000C1138D /* WeatherApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherApp.entitlements; sourceTree = "<group>"; };
+		52F785002A49CAC100A8121E /* CardMaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardMaxView.swift; sourceTree = "<group>"; };
+		52F785012A49CAC100A8121E /* CardMinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardMinView.swift; sourceTree = "<group>"; };
+		52F785022A49CAC100A8121E /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		52F785072A49D2B100A8121E /* QuoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				52713C572A45C9DD0060B2E4 /* WeatherModel.swift */,
+				52F785072A49D2B100A8121E /* QuoteModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -109,6 +118,8 @@
 		527C0FD12A431C5600C1138D /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				52F785062A49D24C00A8121E /* CardViews */,
+				52F785022A49CAC100A8121E /* WeatherView.swift */,
 				52713C592A45CE1E0060B2E4 /* LocationTestView.swift */,
 				527C0FFC2A432DB000C1138D /* WeatherApp.entitlements */,
 				527C0FD22A431C5600C1138D /* WeatherAppApp.swift */,
@@ -144,6 +155,15 @@
 				527C0FEF2A431C5700C1138D /* WeatherAppUITestsLaunchTests.swift */,
 			);
 			path = WeatherAppUITests;
+			sourceTree = "<group>";
+		};
+		52F785062A49D24C00A8121E /* CardViews */ = {
+			isa = PBXGroup;
+			children = (
+				52F785002A49CAC100A8121E /* CardMaxView.swift */,
+				52F785012A49CAC100A8121E /* CardMinView.swift */,
+			);
+			path = CardViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,9 +297,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				52713C552A45C99A0060B2E4 /* WeatherManager.swift in Sources */,
+				52F785032A49CAC100A8121E /* CardMaxView.swift in Sources */,
+				52F785052A49CAC100A8121E /* WeatherView.swift in Sources */,
 				52713C5A2A45CE1E0060B2E4 /* LocationTestView.swift in Sources */,
 				527C0FD52A431C5600C1138D /* ContentView.swift in Sources */,
 				52713C582A45C9DD0060B2E4 /* WeatherModel.swift in Sources */,
+				52F785082A49D2B100A8121E /* QuoteModel.swift in Sources */,
+				52F785042A49CAC100A8121E /* CardMinView.swift in Sources */,
 				527C0FD32A431C5600C1138D /* WeatherAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
