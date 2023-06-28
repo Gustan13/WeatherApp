@@ -46,7 +46,8 @@ struct WeatherView: View {
             CardMinView(weatherModel: $wm.nightWeather, period: "Noite")
         }
         .padding(16)
-        .background(Color(uiColor: .secondarySystemBackground))
+        .background(
+            .radialGradient(Gradient(colors: [Color("rosaTempo"), Color("azulTempo")]), center: .topLeading, startRadius: 0, endRadius: 1000))
         .task {
             if (lm.locationStatus == .none)
             {
