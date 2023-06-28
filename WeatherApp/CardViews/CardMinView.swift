@@ -19,12 +19,12 @@ struct CardMinView: View {
                 
                 Text(period)
                     .font(.body)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                 
                 Text(make_quote(weatherModel))
                     .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                 
                 
                 HStack() {
@@ -33,12 +33,12 @@ struct CardMinView: View {
                         
                         Text("Sensação térmica")
                             .font(.footnote)
-                            .foregroundColor(Color(uiColor: .systemGray))
+                            .foregroundColor(.white)
                         
                         Text("\(weatherModel.temperature.formatted())")
                             .font(.title2)
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                     }
                     
                     Spacer()
@@ -47,7 +47,7 @@ struct CardMinView: View {
                         .font(.title)
                         .fontWeight(.bold)
                       .multilineTextAlignment(.center)
-                      .foregroundColor(.black)
+                      .foregroundColor(.white)
                       .frame(width: 50, height: 50, alignment: .center)
                 }
             }
@@ -55,8 +55,12 @@ struct CardMinView: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(.white)
+        .background(.white.opacity(0.1))
         .cornerRadius(8)
+        .overlay(
+        RoundedRectangle(cornerRadius: 8)
+            .stroke(.white.opacity(0.5), lineWidth: 2)
+            .cornerRadius(8))
     }
 }
 
