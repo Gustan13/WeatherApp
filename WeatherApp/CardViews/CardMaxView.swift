@@ -14,21 +14,21 @@ struct CardMaxView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            
+
                 Text(period)
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundColor(.black)
+                .foregroundColor(color_picker(period))
                 
                 Text("A partir das 7h")
                 .font(.footnote)
-                  .foregroundColor(Color(uiColor: .systemGray))
+                  .foregroundColor(color_picker(period))
             Spacer()
 
                 Text(make_quote(weatherModel))
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                  .foregroundColor(.black)
+                  .foregroundColor(.white)
             
             Spacer()
             
@@ -39,12 +39,12 @@ struct CardMaxView: View {
                     
                     Text("Sensação térmica")
                         .font(.callout)
-                        .foregroundColor(Color(uiColor: .systemGray))
+                        .foregroundColor(color_picker(period))
                 
                     Text("\(weatherModel.temperature.formatted())")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .foregroundColor(color_picker(period))
                 }
                 
                 Spacer()
@@ -55,7 +55,7 @@ struct CardMaxView: View {
                       .weight(.bold)
                   )
                   .multilineTextAlignment(.center)
-                  .foregroundColor(.black)
+                  .foregroundColor(color_picker(period))
                   .frame(width: 64, height: 64, alignment: .center)
                 
             }
@@ -69,6 +69,7 @@ struct CardMaxView: View {
                         .frame(width: 28, height: 28)
                         .font(.title2)
                         .fontWeight(.bold)
+                        .foregroundColor(color_picker(period))
                 
                     
                     VStack(alignment: .leading){
@@ -90,6 +91,7 @@ struct CardMaxView: View {
                             .frame(width: 28, height: 28)
                             .font(.title2)
                             .fontWeight(.bold)
+                            .foregroundColor(color_picker(period))
                         
                         
                         VStack(alignment: .leading){
@@ -112,8 +114,12 @@ struct CardMaxView: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(.white)
+        .background(.white.opacity(0.1))
         .cornerRadius(8)
+        .overlay(
+        RoundedRectangle(cornerRadius: 8)
+            .stroke(.white.opacity(0.5), lineWidth: 2)
+            .cornerRadius(8))
 
         // funfa
 

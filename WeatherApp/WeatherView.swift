@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+let dia = [Color("amareloTempo"), Color("laranjaTempo")]
+let tarde = [Color("laranjaTempo"), Color("rosaTempo")]
+let noite = [Color("rosaTempo"), Color("azulTempo")]
+
 struct WeatherView: View {
     
     static let dateFormatter: DateFormatter = {
@@ -16,11 +20,22 @@ struct WeatherView: View {
         return formatter
     }()
     
+    @State var morningActive: Bool = true
+    @State var eveningActive: Bool = false
+    @State var nightActive: Bool = false
+    
+    @State var morningActive1: Bool = true
+    @State var eveningActive1: Bool = false
+    @State var nightActive1: Bool = false
+//    var anime: Animation = .
+    
     @StateObject var wm = WeatherManager()
     @StateObject var lm = LocationManager()
     
     @State var flag = false
     @State var weatherKitError = false
+    
+    @State var current_colors : [Color] = dia
     
     var body: some View {
         let currentDate = Date()
@@ -41,13 +56,49 @@ struct WeatherView: View {
                     
                 }.foregroundColor(Color(uiColor: .systemBlue))
             }
-            CardMaxView(weatherModel: $wm.morningWeather, period: "Manhã")
-            CardMinView(weatherModel: $wm.eveningWeather, period: "Tarde")
-            CardMinView(weatherModel: $wm.nightWeather, period: "Noite")
+            
+            CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1)
+                .frame(maxWidth: .infinity, maxHeight: morningActive ? .infinity : nil, alignment: .topLeading)
+                .onTapGesture {
+                    withAnimation(.easeInOut){
+                        current_colors = dia
+                        morningActive = true
+                        eveningActive = false
+                        nightActive = false
+                        morningActive1 = true
+                        eveningActive1 = false
+                        nightActive1 = false
+                    }
+                }
+            CardView(weatherModel: $wm.eveningWeather, period: "Tarde", active: eveningActive1)
+                .frame(maxWidth: .infinity, maxHeight: eveningActive ? .infinity : nil, alignment: .center)
+                .onTapGesture {
+                    withAnimation(.easeInOut){
+                        current_colors = tarde
+                        eveningActive = true
+                        morningActive = false
+                        nightActive = false
+                        morningActive1 = false
+                        eveningActive1 = true
+                        nightActive1 = false
+                    }
+                }
+            CardView(weatherModel: $wm.nightWeather, period: "Noite", active: nightActive1)
+                .frame(maxWidth: .infinity, maxHeight: nightActive ? .infinity : nil, alignment: .bottomLeading)
+                .onTapGesture {
+                    withAnimation(.easeInOut) {
+                        current_colors = noite
+                        nightActive = true
+                        morningActive = false
+                        eveningActive = false
+                        morningActive1 = false
+                        eveningActive1 = false
+                        nightActive1 = true
+                    }
+                }
         }
         .padding(16)
-        .background(
-            .radialGradient(Gradient(colors: [Color("rosaTempo"), Color("azulTempo")]), center: .topLeading, startRadius: 0, endRadius: 1000))
+        .background(.radialGradient(Gradient(colors: current_colors), center: .topLeading, startRadius: 0, endRadius: 1000))
         .task {
             if (lm.locationStatus == .none)
             {

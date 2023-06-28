@@ -5,8 +5,8 @@
 //  Created by Gustavo Binder on 26/06/23.
 //
 
-var temperaturas = [6, 11.9, 17.9, 24, 27, 32.9]
-var frases = ["congelante", "muito frio", "frio", "ameno", "quente", "muito quente", "extremamente quente"]
+var temperaturas = [0, 5, 9, 13, 17, 19, 24, 27, 32.9]
+var frases = ["Congelante", "Gelado", "Muito frio", "Frio", "Friozinho", "Fresco", "Ameno", "Quente", "Muito quente", "Extremamente quente"]
 
 func get_phrase(_ temperatura: Double) -> String
 {
@@ -61,18 +61,18 @@ func make_quote(_ weatherModel : WeatherModel) -> String
     {
         if (vento == "" && chuva == "")
         {
-            return "Está \(temp)."
+            return "\(temp)."
         }
         else if (vento == "")
         {
-            return "Está \(temp) e \(chuva)."
+            return "\(temp) e \(chuva)."
         }
         else if (chuva == "")
         {
-            return "Está \(temp) e \(vento)."
+            return "\(temp) e \(vento)."
         }
         
-        return "Está \(temp), \(chuva) e \(vento)."
+        return "\(temp), \(chuva) e \(vento)."
     }
     
     return quote
