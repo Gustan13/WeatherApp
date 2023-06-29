@@ -96,6 +96,7 @@ struct CardView: View {
                                 Text(get_rainphrase(rain: weatherModel.precipitation.value))
                                     .font(.footnote)
                                     .fontWeight(.bold)
+                                    .foregroundColor(.black)
                             }
                             
                             Spacer()
@@ -112,14 +113,15 @@ struct CardView: View {
                                     
                                     Text("Vento")
                                         .font(.caption2)
-                                    
                                         .foregroundColor(Color(uiColor: .secondaryLabel))
                                     
                                     Text(get_windphrase(wind: weatherModel.wind.value))
                                         .font(.footnote)
                                         .fontWeight(.bold)
+                                        .foregroundColor(.black)
                                 }
                             }
+                            .frame(width: 130)
                         }
                     }
                 }
@@ -136,11 +138,11 @@ struct CardView: View {
                         .foregroundColor(.white)
                     HStack() {
                         
-                        VStack(alignment: .leading, spacing: -3) {
+                        VStack(alignment: .leading, spacing: 0) {
                             
                             Text("Sensação térmica")
                                 .font(.footnote)
-                                .foregroundColor(Color(uiColor: .systemGray))
+                                .foregroundColor(.white)
                             
                             Text("\(weatherModel.temperature.formatted())")
                                 .font(.title2)
@@ -163,9 +165,9 @@ struct CardView: View {
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(active == false ? (.white.opacity(0.1)) : (.white))
         .cornerRadius(8)
-//        .overlay(
-//        RoundedRectangle(cornerRadius: 8)
-//            .stroke(.white.opacity(0.5), lineWidth: 3)
-//            .cornerRadius(8))
+        .overlay(
+        RoundedRectangle(cornerRadius: 8)
+            .stroke(.white.opacity(0.5), lineWidth: active == true ? (0) : (2)))
+        .shadow(color: .black.opacity(0.1), radius: active == true ? (4) : (0), y: active == true ? (8) : (0))
     }
 }

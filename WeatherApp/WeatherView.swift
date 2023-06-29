@@ -46,6 +46,7 @@ struct WeatherView: View {
                 Text("Hoje, \(dateString)")
                     .font(.title2)
                     .fontWeight(.bold)
+                    .foregroundColor(.white)
                
                 Spacer()
                 
@@ -54,7 +55,7 @@ struct WeatherView: View {
                         .frame(width: 24, height: 24)
                     Text("\(lm.currentPlacemark?.subAdministrativeArea ?? "?"), \(lm.currentPlacemark?.administrativeArea ?? "?")")
                     
-                }.foregroundColor(Color(uiColor: .systemBlue))
+                }.foregroundColor(.white)
             }
             
             CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1)
@@ -117,6 +118,7 @@ struct WeatherView: View {
         {
             Alert(title: Text("Error"), message: Text("WeatherKit could not be accessed."), dismissButton: .default(Text("Ok")))
         }
+        .preferredColorScheme(ColorScheme.light)
     }
 }
 
