@@ -35,7 +35,7 @@ struct CardView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                     
-                    Text("A partir das \(horario)")
+                    Text("A partir das \(horario)h")
                         .font(.footnote)
                         .foregroundColor(Color(uiColor: .systemGray))
                     Spacer()

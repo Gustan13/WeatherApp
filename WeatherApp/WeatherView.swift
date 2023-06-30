@@ -58,7 +58,7 @@ struct WeatherView: View {
                 }.foregroundColor(.white)
             }
             
-            CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1)
+            CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1, horario: 8)
                 .frame(maxWidth: .infinity, maxHeight: morningActive ? .infinity : nil, alignment: .topLeading)
                 .onTapGesture {
                     withAnimation(.easeInOut){
@@ -71,7 +71,7 @@ struct WeatherView: View {
                         nightActive1 = false
                     }
                 }
-            CardView(weatherModel: $wm.eveningWeather, period: "Tarde", active: eveningActive1)
+            CardView(weatherModel: $wm.eveningWeather, period: "Tarde", active: eveningActive1, horario: 16)
                 .frame(maxWidth: .infinity, maxHeight: eveningActive ? .infinity : nil, alignment: .center)
                 .onTapGesture {
                     withAnimation(.easeInOut){
@@ -84,7 +84,7 @@ struct WeatherView: View {
                         nightActive1 = false
                     }
                 }
-            CardView(weatherModel: $wm.nightWeather, period: "Noite", active: nightActive1)
+            CardView(weatherModel: $wm.nightWeather, period: "Noite", active: nightActive1, horario: 20)
                 .frame(maxWidth: .infinity, maxHeight: nightActive ? .infinity : nil, alignment: .bottomLeading)
                 .onTapGesture {
                     withAnimation(.easeInOut) {
