@@ -25,19 +25,75 @@ struct CardView: View {
     var active: Bool
     var horario: Int
     
+    @Binding var h : Int
+    
+    @State var date = Date()
+    
     var body: some View {
+        
+        let dateRange: ClosedRange<Date> = {
+            let calendar = Calendar.current
+            
+            var startHour : Int {
+                switch period
+                {
+                case "Manhã":
+                    return 4
+                case "Tarde":
+                    return 12
+                case "Noite":
+                    return 18
+                default:
+                    return 0
+                }
+            }
+            
+            var endHour : Int {
+                switch period
+                {
+                case "Manhã":
+                    return 11
+                case "Tarde":
+                    return 17
+                case "Noite":
+                    return 23
+                default:
+                    return 0
+                }
+            }
+            
+            let startComponents = DateComponents(hour: startHour)//DateComponents(year: 2021, month: 1, day: 1)
+            let endComponents = DateComponents(hour: endHour)
+            return calendar.date(from:startComponents)!
+                ...
+                calendar.date(from:endComponents)!
+        }()
+        
         VStack(alignment: .leading) {
             
             if active {
                 Group {
-                    Text(period)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
+                    HStack {
+                        Text(period)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        DatePicker(
+                            "",
+                            selection: $date,
+                            in: dateRange,
+                            displayedComponents: [.hourAndMinute]
+                        )
+                        .onChange(of: date) { newValue in
+                            let calendar = Calendar.current
+                            
+                            h = calendar.component(.hour, from: newValue)
+                        }
+                    }
                     
-                    Text("A partir das \(horario)h")
-                        .font(.footnote)
-                        .foregroundColor(Color(uiColor: .systemGray))
                     Spacer()
                     
                     Text(make_quote(weatherModel))

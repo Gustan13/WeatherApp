@@ -27,7 +27,7 @@ func make_quote(_ weatherModel : WeatherModel) -> String
 {
     
     var vento : String {
-        if (weatherModel.wind.value > 6)
+        if (weatherModel.wind.value > 19)
         {
             return "ventando"
         }
@@ -61,18 +61,18 @@ func make_quote(_ weatherModel : WeatherModel) -> String
     {
         if (vento == "" && chuva == "")
         {
-            return "\(temp)."
+            return "\(temp)"
         }
         else if (vento == "")
         {
-            return "\(temp) e \(chuva)."
+            return "\(temp) e \(chuva)"
         }
         else if (chuva == "")
         {
-            return "\(temp) e \(vento)."
+            return "\(temp) e \(vento)"
         }
         
-        return "\(temp), \(chuva) e \(vento)."
+        return "\(temp), \(chuva) e \(vento)"
     }
     
     return quote

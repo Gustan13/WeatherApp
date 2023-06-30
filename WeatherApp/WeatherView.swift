@@ -42,6 +42,10 @@ struct WeatherView: View {
     
     @State var hour : Int!
     
+    @State var dayHour : Int = 10
+    @State var eveningHour : Int = 16
+    @State var nightHour : Int = 20
+    
     var body: some View {
 
         let dateString = WeatherView.dateFormatter.string(from: currentDate)
@@ -63,7 +67,7 @@ struct WeatherView: View {
                 }.foregroundColor(.white)
             }
             
-            CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1, horario: 8)
+            CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1, horario: 8, h: $dayHour)
                 .frame(maxWidth: .infinity, maxHeight: morningActive ? .infinity : nil, alignment: .topLeading)
                 .onTapGesture {
                     withAnimation(anime){
@@ -76,7 +80,11 @@ struct WeatherView: View {
                         nightActive1 = false
                     }
                 }
-            CardView(weatherModel: $wm.eveningWeather, period: "Tarde", active: eveningActive1, horario: 16)
+                .onChange(of: dayHour) { newValue in
+                    get_weather_info(newValue, eveningHour, nightHour)
+                    print("updated day time")
+                }
+            CardView(weatherModel: $wm.eveningWeather, period: "Tarde", active: eveningActive1, horario: 16, h: $eveningHour)
                 .frame(maxWidth: .infinity, maxHeight: eveningActive ? .infinity : nil, alignment: .center)
                 .onTapGesture {
                     withAnimation(anime){
@@ -89,7 +97,11 @@ struct WeatherView: View {
                         nightActive1 = false
                     }
                 }
-            CardView(weatherModel: $wm.nightWeather, period: "Noite", active: nightActive1, horario: 20)
+                .onChange(of: eveningHour) { newValue in
+                    get_weather_info(dayHour, newValue, nightHour)
+                    print("updated evening time")
+                }
+            CardView(weatherModel: $wm.nightWeather, period: "Noite", active: nightActive1, horario: 20, h: $nightHour)
                 .frame(maxWidth: .infinity, maxHeight: nightActive ? .infinity : nil, alignment: .bottomLeading)
                 .onTapGesture {
                     withAnimation(anime) {
@@ -101,6 +113,10 @@ struct WeatherView: View {
                         eveningActive1 = false
                         nightActive1 = true
                     }
+                }
+                .onChange(of: nightHour) { newValue in
+                    get_weather_info(dayHour, eveningHour, newValue)
+                    print("updated night time")
                 }
         }
         .padding(16)
@@ -146,18 +162,7 @@ struct WeatherView: View {
             }
         }
         .task {
-            if (lm.locationStatus == .none)
-            {
-                return
-            }
-
-            if (lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse)
-            {
-                print("in")
-                weatherKitError = await wm.get_weather(lat: lm.lastLocation?.coordinate.latitude ?? -25, long: lm.lastLocation?.coordinate.longitude ?? -49)
-                lm.stop()
-                print("flag")
-            }
+            get_weather_info(dayHour, eveningHour, nightHour)
         }
         .alert(isPresented: $weatherKitError)
         {
@@ -179,24 +184,29 @@ struct WeatherView: View {
             
             if day_iterator != day_buffer
             {
-                Task {
-                    if (lm.locationStatus == .none)
-                    {
-                        return
-                    }
-                    
-                    if (lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse)
-                    {
-                        print("in")
-                        weatherKitError = await wm.get_weather(lat: lm.lastLocation?.coordinate.latitude ?? -25, long: lm.lastLocation?.coordinate.longitude ?? -49)
-                        lm.stop()
-                        print("flag")
-                    }
-                    print("Hello")
-                }
+                get_weather_info(dayHour, eveningHour, nightHour)
                 
                 today = Date()
             }
+        }
+    }
+    
+    private func get_weather_info(_ d: Int, _ e: Int, _ n: Int)
+    {
+        Task {
+            if (lm.locationStatus == .none)
+            {
+                return
+            }
+            
+            if (lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse)
+            {
+                print("in")
+                weatherKitError = await wm.get_weather(lat: lm.lastLocation?.coordinate.latitude ?? -25, long: lm.lastLocation?.coordinate.longitude ?? -49, dayHour, eveningHour, nightHour)
+                lm.stop()
+                print("flag")
+            }
+            print("Hello")
         }
     }
 }

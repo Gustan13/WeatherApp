@@ -7,8 +7,8 @@
 
 import Foundation
 
-let frases_vento = ["Sem vento", "Brisa", "Vento", "Ventania", "Vendaval", "Tornado"]
-let vento_vel : [Double] = [7, 20, 40, 75, 118]
+let frases_vento = ["Sem vento", "Brisa Leve", "Brisa", "Vento", "Ventania", "Vendaval", "Tornado"]
+let vento_vel : [Double] = [7, 11, 20, 40, 75, 118]
 
 func get_windphrase(wind: Double) -> String
 {
