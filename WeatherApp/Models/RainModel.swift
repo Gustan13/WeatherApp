@@ -16,7 +16,6 @@ func get_rainphrase(rain: Double) -> String
     {
         if rain < chuva_mm[i]
         {
-            print(frases_chuva[i])
             return frases_chuva[i]
         }
     }
