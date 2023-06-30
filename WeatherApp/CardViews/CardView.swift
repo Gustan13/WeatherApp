@@ -32,7 +32,7 @@ struct CardView: View {
                     Text(period)
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(color_picker(period))
+                        .foregroundColor(.black)
                     
                     Text("A partir das 7h")
                         .font(.footnote)
@@ -42,7 +42,7 @@ struct CardView: View {
                     Text(make_quote(weatherModel))
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .foregroundColor(color_picker(period))
                     
                     Spacer()
                     
@@ -58,7 +58,7 @@ struct CardView: View {
                             Text("\(weatherModel.temperature.formatted())")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
-                                .foregroundColor(color_picker(period))
+                                .foregroundColor(.black)
                         }
                         
                         Spacer()
@@ -69,7 +69,7 @@ struct CardView: View {
                                     .weight(.bold)
                             )
                             .multilineTextAlignment(.center)
-                            .foregroundColor(color_picker(period))
+                            .foregroundColor(.black)
                             .frame(width: 64, height: 64, alignment: .center)
                         
                     }
