@@ -194,6 +194,8 @@ struct WeatherView: View {
                     }
                     print("Hello")
                 }
+                
+                today = Date()
             }
         }
     }
