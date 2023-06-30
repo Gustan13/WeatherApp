@@ -23,6 +23,7 @@ struct CardView: View {
     @Binding var weatherModel : WeatherModel
     var period : String
     var active: Bool
+    var horario: Int
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -34,7 +35,7 @@ struct CardView: View {
                         .fontWeight(.bold)
                         .foregroundColor(color_picker(period))
                     
-                    Text("A partir das 7h")
+                    Text("A partir das \(horario)")
                         .font(.footnote)
                         .foregroundColor(Color(uiColor: .systemGray))
                     Spacer()
