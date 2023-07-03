@@ -42,9 +42,9 @@ struct WeatherView: View {
     
     @State var hour : Int!
     
-    @State var dayHour : Int = 10
-    @State var eveningHour : Int = 16
-    @State var nightHour : Int = 20
+    @State var dayHour : Int = UserDefaults.standard.integer(forKey: "dayHour")
+    @State var eveningHour : Int = UserDefaults.standard.integer(forKey: "eveningHour")
+    @State var nightHour : Int = UserDefaults.standard.integer(forKey: "nightHour")
     
     var body: some View {
 
@@ -67,7 +67,7 @@ struct WeatherView: View {
                 }.foregroundColor(.white)
             }
             
-            CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1, horario: 8, h: $dayHour)
+            CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1, horario: 8, h: $dayHour, date: Calendar.current.date(bySettingHour: dayHour, minute: 0, second: 0, of: Date()) ?? Date())
                 .frame(maxWidth: .infinity, maxHeight: morningActive ? .infinity : nil, alignment: .topLeading)
                 .onTapGesture {
                     withAnimation(anime){
@@ -84,7 +84,7 @@ struct WeatherView: View {
                     get_weather_info(newValue, eveningHour, nightHour)
                     print("updated day time")
                 }
-            CardView(weatherModel: $wm.eveningWeather, period: "Tarde", active: eveningActive1, horario: 16, h: $eveningHour)
+            CardView(weatherModel: $wm.eveningWeather, period: "Tarde", active: eveningActive1, horario: 16, h: $eveningHour, date: Calendar.current.date(bySettingHour: eveningHour, minute: 0, second: 0, of: Date())!)
                 .frame(maxWidth: .infinity, maxHeight: eveningActive ? .infinity : nil, alignment: .center)
                 .onTapGesture {
                     withAnimation(anime){
@@ -101,7 +101,7 @@ struct WeatherView: View {
                     get_weather_info(dayHour, newValue, nightHour)
                     print("updated evening time")
                 }
-            CardView(weatherModel: $wm.nightWeather, period: "Noite", active: nightActive1, horario: 20, h: $nightHour)
+            CardView(weatherModel: $wm.nightWeather, period: "Noite", active: nightActive1, horario: 20, h: $nightHour, date: Calendar.current.date(bySettingHour: nightHour, minute: 0, second: 0, of: Date()) ?? Date())
                 .frame(maxWidth: .infinity, maxHeight: nightActive ? .infinity : nil, alignment: .bottomLeading)
                 .onTapGesture {
                     withAnimation(anime) {

@@ -27,12 +27,29 @@ struct CardView: View {
     
     @Binding var h : Int
     
-    @State var date = Date()
+    var hourKey : String {
+        switch period
+        {
+        case "Manhã":
+            return "dayHour"
+        case "Tarde":
+            return "eveningHour"
+        case "Noite":
+            return "nightHour"
+        default:
+            return "none"
+        }
+    }
+    
+    @State var date : Date
     
     var body: some View {
         
         let dateRange: ClosedRange<Date> = {
             let calendar = Calendar.current
+            let year = calendar.component(.year, from: date)
+            let month = calendar.component(.month, from: date)
+            let day = calendar.component(.day, from: date)
             
             var startHour : Int {
                 switch period
@@ -62,8 +79,8 @@ struct CardView: View {
                 }
             }
             
-            let startComponents = DateComponents(hour: startHour)//DateComponents(year: 2021, month: 1, day: 1)
-            let endComponents = DateComponents(hour: endHour)
+            let startComponents = DateComponents(year: year, month: month, day: day, hour: startHour)
+            let endComponents = DateComponents(year: year, month: month, day: day, hour: endHour)
             return calendar.date(from:startComponents)!
                 ...
                 calendar.date(from:endComponents)!
@@ -89,9 +106,10 @@ struct CardView: View {
                         )
                         .onChange(of: date) { newValue in
                             let calendar = Calendar.current
-                            
                             h = calendar.component(.hour, from: newValue)
+                            UserDefaults.standard.setValue(h, forKey: hourKey)
                         }
+                        .datePickerStyle(.graphical)
                     }
                     
                     Spacer()
@@ -226,5 +244,9 @@ struct CardView: View {
         RoundedRectangle(cornerRadius: 8)
             .stroke(.white.opacity(0.5), lineWidth: active == true ? (0) : (2)))
         .shadow(color: .black.opacity(0.1), radius: active == true ? (4) : (0), y: active == true ? (8) : (0))
+        .onAppear
+        {
+            print("\(date), bro")
+        }
     }
 }
