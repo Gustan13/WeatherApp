@@ -51,33 +51,74 @@ struct WeatherView: View {
         let dateString = WeatherView.dateFormatter.string(from: currentDate)
         
         VStack (spacing: 16) {
-            HStack() {
-                Text("Hoje, \(dateString)")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-               
-                Spacer()
-                
-                HStack {
-                    Image(systemName: "location.fill")
-                        .frame(width: 24, height: 24)
-                    Text("\(lm.currentPlacemark?.subAdministrativeArea ?? "?"), \(lm.currentPlacemark?.administrativeArea ?? "?")")
+            if !morningActive && !eveningActive && !nightActive {
+                VStack() {
+                    HStack {
+                        Image(systemName: "location.fill")
+                            .frame(width: 24, height: 24)
+                        Text("\(lm.currentPlacemark?.subAdministrativeArea ?? "?"), \(lm.currentPlacemark?.administrativeArea ?? "?")")
+                        
+                    }.foregroundColor(.white)
                     
-                }.foregroundColor(.white)
+                    Spacer()
+                    
+                    HStack {
+                        VStack (alignment: .leading) {
+                            Text("Hoje,")
+                            Text(dateString)
+                                .fontWeight(.bold)
+                        }
+                        .font(
+                            Font.system(size: 64)
+//                                    .weight(.bold)
+                        )
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 16)
+                    
+                    Spacer()
+                }
+            } else {
+                HStack() {
+                    Text("Hoje, \(dateString)")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Image(systemName: "location.fill")
+                            .frame(width: 24, height: 24)
+                        Text("\(lm.currentPlacemark?.subAdministrativeArea ?? "?"), \(lm.currentPlacemark?.administrativeArea ?? "?")")
+                        
+                    }.foregroundColor(.white)
+                }
             }
             
             CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1, horario: 8, h: $dayHour, date: Calendar.current.date(bySettingHour: dayHour, minute: 0, second: 0, of: Date()) ?? Date())
                 .frame(maxWidth: .infinity, maxHeight: morningActive ? .infinity : nil, alignment: .topLeading)
                 .onTapGesture {
                     withAnimation(anime){
-                        current_colors = dia
-                        morningActive = true
-                        eveningActive = false
-                        nightActive = false
-                        morningActive1 = true
-                        eveningActive1 = false
-                        nightActive1 = false
+                        if !morningActive {
+                            current_colors = dia
+                            morningActive = true
+                            eveningActive = false
+                            nightActive = false
+                            morningActive1 = true
+                            eveningActive1 = false
+                            nightActive1 = false
+                        } else {
+                            morningActive = false
+                            eveningActive = false
+                            nightActive = false
+                            morningActive1 = false
+                            eveningActive1 = false
+                            nightActive1 = false
+                        }
                     }
                 }
                 .onChange(of: dayHour) { newValue in
@@ -88,13 +129,22 @@ struct WeatherView: View {
                 .frame(maxWidth: .infinity, maxHeight: eveningActive ? .infinity : nil, alignment: .center)
                 .onTapGesture {
                     withAnimation(anime){
-                        current_colors = tarde
-                        eveningActive = true
-                        morningActive = false
-                        nightActive = false
-                        morningActive1 = false
-                        eveningActive1 = true
-                        nightActive1 = false
+                        if !eveningActive {
+                            current_colors = tarde
+                            eveningActive = true
+                            morningActive = false
+                            nightActive = false
+                            morningActive1 = false
+                            eveningActive1 = true
+                            nightActive1 = false
+                        } else {
+                            morningActive = false
+                            eveningActive = false
+                            nightActive = false
+                            morningActive1 = false
+                            eveningActive1 = false
+                            nightActive1 = false
+                        }
                     }
                 }
                 .onChange(of: eveningHour) { newValue in
@@ -105,13 +155,22 @@ struct WeatherView: View {
                 .frame(maxWidth: .infinity, maxHeight: nightActive ? .infinity : nil, alignment: .bottomLeading)
                 .onTapGesture {
                     withAnimation(anime) {
-                        current_colors = noite
-                        nightActive = true
-                        morningActive = false
-                        eveningActive = false
-                        morningActive1 = false
-                        eveningActive1 = false
-                        nightActive1 = true
+                        if !nightActive {
+                            current_colors = noite
+                            nightActive = true
+                            morningActive = false
+                            eveningActive = false
+                            morningActive1 = false
+                            eveningActive1 = false
+                            nightActive1 = true
+                        } else {
+                            morningActive = false
+                            eveningActive = false
+                            nightActive = false
+                            morningActive1 = false
+                            eveningActive1 = false
+                            nightActive1 = false
+                        }
                     }
                 }
                 .onChange(of: nightHour) { newValue in

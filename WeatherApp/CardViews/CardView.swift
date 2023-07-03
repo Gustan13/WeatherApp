@@ -110,6 +110,7 @@ struct CardView: View {
                             UserDefaults.standard.setValue(h, forKey: hourKey)
                         }
                         .datePickerStyle(.graphical)
+                        .preferredColorScheme(.dark)
                     }
                     
                     Spacer()
@@ -122,34 +123,32 @@ struct CardView: View {
                     Spacer()
                     
                     HStack() {
-                        
-                        
-                        VStack(alignment: .leading, spacing: -3) {
-                            
-                            Text("Sensação térmica")
-                                .font(.callout)
-                                .foregroundColor(Color(uiColor: .systemGray))
-                            
-                            Text("\(weatherModel.temperature.formatted())")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                                .foregroundColor(.black)
-                        }
-                        
-                        Spacer()
-                        
                         Image(systemName: "\(weatherModel.symbolName)")
                             .font(
-                                Font.custom("SF Pro", size: 48)
+                                Font.custom("SF Pro", size: 40)
                                     .weight(.bold)
                             )
                             .multilineTextAlignment(.center)
                             .foregroundColor(.black)
-                            .frame(width: 64, height: 64, alignment: .center)
+                            .frame(width: 64, height: 64, alignment: .leading)
                         
+                        Spacer()
+                        
+                        VStack(alignment: .center) {
+                            
+                            Text("Sensação")
+                                .font(.footnote)
+                                .foregroundColor(Color(uiColor: .systemGray))
+                            
+                            Text("\(weatherModel.temperature.formatted())")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                        }
                     }
                     
                     Divider()
+                        .padding(.bottom, 8)
                     
                     HStack(){
                         
@@ -208,14 +207,23 @@ struct CardView: View {
                         .foregroundColor(.white)
                     
                     Text(make_quote(weatherModel))
-                        .font(.title2)
+                        .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     HStack() {
                         
-                        VStack(alignment: .leading, spacing: 0) {
+                        Image(systemName: "\(weatherModel.symbolName)")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                            .frame(width: 50, height: 50, alignment: .center)
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .center) {
                             
-                            Text("Sensação térmica")
+                            Text("Sensação")
                                 .font(.footnote)
                                 .foregroundColor(.white)
                             
@@ -224,14 +232,6 @@ struct CardView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                         }
-                        Spacer()
-                        
-                        Image(systemName: "\(weatherModel.symbolName)")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                            .frame(width: 50, height: 50, alignment: .center)
                     }
                 }
             }
