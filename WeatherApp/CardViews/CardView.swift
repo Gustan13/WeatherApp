@@ -20,6 +20,7 @@ func color_picker(_ period: String) -> Color
 
 struct CardView: View {
     
+    @Namespace var namespace
     @Binding var weatherModel : WeatherModel
     var period : String
     var active: Bool
@@ -92,9 +93,11 @@ struct CardView: View {
                 Group {
                     HStack {
                         Text(period)
-                            .font(.title2)
+                            .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
+                            .frame(width: 100, height: 15, alignment: .leading)
+                            .matchedGeometryEffect(id: "period", in: namespace)
                         
                         Spacer()
                         
@@ -110,15 +113,24 @@ struct CardView: View {
                             UserDefaults.standard.setValue(h, forKey: hourKey)
                         }
                         .datePickerStyle(.graphical)
-                        .preferredColorScheme(.dark)
+                        .preferredColorScheme(.light)
+                        .onTapGesture {
+                            print("Oi")
+                        }
                     }
                     
                     Spacer()
                     
-                    Text(make_quote(weatherModel))
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(color_picker(period))
+                    HStack {
+                        Text(make_quote(weatherModel))
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(color_picker(period))
+                            .frame(width: 300, height: 125, alignment: .leading)
+
+                        Spacer()
+                    }
+                    .matchedGeometryEffect(id: "quote", in: namespace)
                     
                     Spacer()
                     
@@ -146,6 +158,7 @@ struct CardView: View {
                                 .foregroundColor(.black)
                         }
                     }
+                    .matchedGeometryEffect(id: "info", in: namespace)
                     
                     Divider()
                         .padding(.bottom, 8)
@@ -205,11 +218,19 @@ struct CardView: View {
                     Text(period)
                         .font(.body)
                         .foregroundColor(.white)
+                        .frame(width: 100, height: 15, alignment: .leading)
+                        .matchedGeometryEffect(id: "period", in: namespace)
                     
-                    Text(make_quote(weatherModel))
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
+                    HStack {
+                        Text(make_quote(weatherModel))
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
+                    .matchedGeometryEffect(id: "quote", in: namespace)
+                    
                     HStack() {
                         
                         Image(systemName: "\(weatherModel.symbolName)")
@@ -233,6 +254,7 @@ struct CardView: View {
                                 .foregroundColor(.white)
                         }
                     }
+                    .matchedGeometryEffect(id: "info", in: namespace)
                 }
             }
         }

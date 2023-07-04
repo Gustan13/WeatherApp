@@ -13,6 +13,8 @@ let noite = [Color("rosaTempo"), Color("azulTempo")]
 
 struct WeatherView: View {
     
+    @Namespace var namespace
+    
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "d 'de' MMM"
@@ -46,6 +48,8 @@ struct WeatherView: View {
     @State var eveningHour : Int = UserDefaults.standard.integer(forKey: "eveningHour")
     @State var nightHour : Int = UserDefaults.standard.integer(forKey: "nightHour")
     
+    @State var isAnimating = false
+    
     var body: some View {
 
         let dateString = WeatherView.dateFormatter.string(from: currentDate)
@@ -58,7 +62,9 @@ struct WeatherView: View {
                             .frame(width: 24, height: 24)
                         Text("\(lm.currentPlacemark?.subAdministrativeArea ?? "?"), \(lm.currentPlacemark?.administrativeArea ?? "?")")
                         
-                    }.foregroundColor(.white)
+                    }
+                    .foregroundColor(.white)
+                    .matchedGeometryEffect(id: "date2", in: namespace)
                     
                     Spacer()
                     
@@ -68,6 +74,8 @@ struct WeatherView: View {
                             Text(dateString)
                                 .fontWeight(.bold)
                         }
+                        .frame(width: 350, height: 200, alignment: .leading)
+                        .matchedGeometryEffect(id: "date3", in: namespace)
                         .font(
                             Font.system(size: 64)
 //                                    .weight(.bold)
@@ -81,12 +89,15 @@ struct WeatherView: View {
                     
                     Spacer()
                 }
+//                .matchedGeometryEffect(id: "date", in: namespace)
             } else {
                 HStack() {
                     Text("Hoje, \(dateString)")
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
+                        .frame(width: 200, height: 15, alignment: .leading)
+                        .matchedGeometryEffect(id: "date3", in: namespace)
                     
                     Spacer()
                     
@@ -95,8 +106,11 @@ struct WeatherView: View {
                             .frame(width: 24, height: 24)
                         Text("\(lm.currentPlacemark?.subAdministrativeArea ?? "?"), \(lm.currentPlacemark?.administrativeArea ?? "?")")
                         
-                    }.foregroundColor(.white)
+                    }
+                    .foregroundColor(.white)
+                    .matchedGeometryEffect(id: "date2", in: namespace)
                 }
+                .matchedGeometryEffect(id: "date", in: namespace)
             }
             
             CardView(weatherModel: $wm.morningWeather, period: "Manhã", active: morningActive1, horario: 8, h: $dayHour, date: Calendar.current.date(bySettingHour: dayHour, minute: 0, second: 0, of: Date()) ?? Date())
@@ -179,7 +193,16 @@ struct WeatherView: View {
                 }
         }
         .padding(16)
-        .background(.radialGradient(Gradient(colors: current_colors), center: .topLeading, startRadius: 0, endRadius: 1000))
+        .background {
+            RadialGradient(colors: current_colors, center: .topLeading, startRadius: isAnimating ? 0 : 250, endRadius: isAnimating ? 1000 : 750)
+                .ignoresSafeArea()
+                .onAppear {
+                    withAnimation(.spring(response: 3).repeatForever(autoreverses: true)) {
+                        isAnimating.toggle()
+                    }
+                }
+        }
+        .matchedGeometryEffect(id: "gradient", in: namespace)
         .onAppear
         {
             startUpdatingDate()
