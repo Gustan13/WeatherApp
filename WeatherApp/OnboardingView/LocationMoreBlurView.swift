@@ -1,13 +1,14 @@
 import SwiftUI
 
-struct LocationBlurView: View {
+struct LocationMoreBlurView: View {
     
     @Binding var tabSelected: Int
-    @StateObject var lm = LocationManager()
     
     
     var body: some View {
+        
         ZStack(){
+            
             
             VStack(){
                 
@@ -277,8 +278,8 @@ struct LocationBlurView: View {
                     .bold()
                     .foregroundColor(.white)
                     .onTapGesture {
-                        lm.requestLocationAlways()
-                        tabSelected = 1
+//                        lm.requestLocationAlways()
+                        tabSelected = 2
                     }
                 
                 Spacer()
@@ -287,7 +288,7 @@ struct LocationBlurView: View {
 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black.opacity(0.5))
+            .background(Color.black.opacity(0.8))
         }
         
         
@@ -297,3 +298,9 @@ struct LocationBlurView: View {
     
     
 }
+
+//struct LocationBlurView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationBlurView()
+//    }
+//}
