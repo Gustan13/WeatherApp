@@ -197,7 +197,7 @@ struct WeatherView: View {
             RadialGradient(colors: current_colors, center: .topLeading, startRadius: isAnimating ? 0 : 250, endRadius: isAnimating ? 1000 : 750)
                 .ignoresSafeArea()
                 .onAppear {
-                    withAnimation(.spring(response: 3).repeatForever(autoreverses: true)) {
+                    withAnimation(.spring(response: 5).repeatForever(autoreverses: true)) {
                         isAnimating.toggle()
                     }
                 }
@@ -210,7 +210,7 @@ struct WeatherView: View {
             withAnimation(.spring())
             {
                 print(hour!)
-                if(hour <= 10) {
+                if(hour <= 12) {
                     current_colors = dia
                     
                     morningActive = true
@@ -220,7 +220,7 @@ struct WeatherView: View {
                     morningActive1 = true
                     eveningActive1 = false
                     nightActive1 = false
-                } else if (hour <= 16) {
+                } else if (hour <= 18) {
                     current_colors = tarde
                     
                     morningActive = false

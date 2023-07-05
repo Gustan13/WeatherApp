@@ -80,8 +80,8 @@ struct CardView: View {
                 }
             }
             
-            let startComponents = DateComponents(year: year, month: month, day: day, hour: startHour)
-            let endComponents = DateComponents(year: year, month: month, day: day, hour: endHour)
+            let startComponents = DateComponents(year: year, month: month, day: day, hour: startHour, minute: 0)
+            let endComponents = DateComponents(year: year, month: month, day: day, hour: endHour, minute: 59)
             return calendar.date(from:startComponents)!
                 ...
                 calendar.date(from:endComponents)!
@@ -117,6 +117,7 @@ struct CardView: View {
                         .onTapGesture {
                             print("Oi")
                         }
+                        .padding(.trailing, -12)
                     }
                     
                     Spacer()
@@ -238,7 +239,7 @@ struct CardView: View {
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
                             .foregroundColor(.white)
-                            .frame(width: 50, height: 50, alignment: .center)
+                            .frame(width: 50, height: 50, alignment: .leading)
                         
                         Spacer()
                         
