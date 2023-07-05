@@ -44,9 +44,12 @@ struct WeatherView: View {
     
     @State var hour : Int!
     
-    @State var dayHour : Int = UserDefaults.standard.integer(forKey: "dayHour")
-    @State var eveningHour : Int = UserDefaults.standard.integer(forKey: "eveningHour")
-    @State var nightHour : Int = UserDefaults.standard.integer(forKey: "nightHour")
+//    @State var dayHour : Int = UserDefaults.standard.integer(forKey: "dayHour")
+//    @State var eveningHour : Int = UserDefaults.standard.integer(forKey: "eveningHour")
+//    @State var nightHour : Int = UserDefaults.standard.integer(forKey: "nightHour")
+    @AppStorage("dayHour") var dayHour : Int = 7
+    @AppStorage("eveningHour") var eveningHour : Int = 16
+    @AppStorage("nightHour") var nightHour : Int = 22
     
     @State var isAnimating = false
     
