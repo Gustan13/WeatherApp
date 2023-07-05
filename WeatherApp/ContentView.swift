@@ -78,7 +78,7 @@ struct ContentView: View {
             }
         }.onAppear{
             if (lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse){
-                onBoarding = true
+                onBoarding = false
             }
         }
         
