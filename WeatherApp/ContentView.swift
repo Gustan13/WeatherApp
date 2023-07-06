@@ -16,8 +16,6 @@ struct ContentView: View {
     @Namespace var namespace
     
     var body: some View {
-        let transition2 = AnyTransition.asymmetric(insertion: .push(from: .trailing), removal: .slide).combined(with: .opacity)
-        let transition = AnyTransition.push(from: .trailing)
         
         ZStack(){
             
