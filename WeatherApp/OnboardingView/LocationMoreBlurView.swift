@@ -290,13 +290,7 @@ struct LocationMoreBlurView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.black.opacity(0.8))
         }
-        
-        
-        
-        
     }
-    
-    
 }
 
 //struct LocationBlurView_Previews: PreviewProvider {

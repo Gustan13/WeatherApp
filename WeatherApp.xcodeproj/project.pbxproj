@@ -23,6 +23,7 @@
 		52F7850C2A4B115700A8121E /* WindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7850B2A4B115700A8121E /* WindModel.swift */; };
 		52F7850E2A4B13C900A8121E /* RainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7850D2A4B13C900A8121E /* RainModel.swift */; };
 		52F785122A4C839100A8121E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F785112A4C839100A8121E /* CardView.swift */; };
+		52F7851B2A576A3A00A8121E /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7851A2A576A3A00A8121E /* NextButton.swift */; };
 		A7A018F32A543DC600C49D04 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A018F22A543DC600C49D04 /* ContentView.swift */; };
 		A7A018F52A54415200C49D04 /* LocationMoreBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A018F42A54415200C49D04 /* LocationMoreBlurView.swift */; };
 		A7A018F72A54422D00C49D04 /* LocationInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A018F62A54422D00C49D04 /* LocationInstructionView.swift */; };
@@ -70,6 +71,7 @@
 		52F7850B2A4B115700A8121E /* WindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindModel.swift; sourceTree = "<group>"; };
 		52F7850D2A4B13C900A8121E /* RainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainModel.swift; sourceTree = "<group>"; };
 		52F785112A4C839100A8121E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		52F7851A2A576A3A00A8121E /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		A7A018F22A543DC600C49D04 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A7A018F42A54415200C49D04 /* LocationMoreBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMoreBlurView.swift; sourceTree = "<group>"; };
 		A7A018F62A54422D00C49D04 /* LocationInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInstructionView.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				A7A018F82A544A4800C49D04 /* CardInstructionView.swift */,
 				A7A018FA2A544D7200C49D04 /* HorarioInstructionView.swift */,
 				A7A018FC2A544FE500C49D04 /* MiniCardInstructionView.swift */,
+				52F7851A2A576A3A00A8121E /* NextButton.swift */,
 			);
 			path = OnboardingView;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				52F7850E2A4B13C900A8121E /* RainModel.swift in Sources */,
 				A7A018F52A54415200C49D04 /* LocationMoreBlurView.swift in Sources */,
 				52F7850C2A4B115700A8121E /* WindModel.swift in Sources */,
+				52F7851B2A576A3A00A8121E /* NextButton.swift in Sources */,
 				52713C582A45C9DD0060B2E4 /* WeatherModel.swift in Sources */,
 				A7A018FD2A544FE500C49D04 /* MiniCardInstructionView.swift in Sources */,
 				52F785082A49D2B100A8121E /* QuoteModel.swift in Sources */,
@@ -512,6 +516,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "WeatherApp needs your location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "WeatherApp needs your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WeatherApp needs your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -544,6 +549,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "WeatherApp needs your location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "WeatherApp needs your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WeatherApp needs your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

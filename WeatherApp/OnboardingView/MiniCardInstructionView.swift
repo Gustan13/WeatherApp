@@ -263,6 +263,12 @@ struct MiniCardInstruction: View {
                             .foregroundColor(.white)
                     }
                     .font(.system(size: 8))
+                    
+                    HStack {
+                        Spacer()
+                        NextButton(increaseValue: $tabSelected)
+                    }
+                    .padding(.horizontal)
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth:.infinity)

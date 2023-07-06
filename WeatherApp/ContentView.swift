@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @GestureState private var swipeOffset: CGFloat = 0
-    @State private var currentTab = 0
-    var lm = LocationManager()
+    @State private var currentTab = 1
+    @StateObject var lm = LocationManager()
     @State var onBoarding: Bool = true
     
     @Namespace var namespace
@@ -25,61 +25,34 @@ struct ContentView: View {
             else {
                 ZStack(){
                     switch(currentTab){
-                    case 0:
-                        LocationBlurView(tabSelected: $currentTab)
-//                            .transition(transition)
-                            .matchedGeometryEffect(id: "place", in: namespace)
                     case 1:
-                        LocationMoreBlurView(tabSelected: $currentTab)
-//                            .transition(transition)
-                            .matchedGeometryEffect(id: "place", in: namespace)
+                        if lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse
+                        {
+                            LocationInstructionView(tabSelected: $currentTab)
+                        } else {
+                            LocationBlurView(tabSelected: $currentTab)
+                        }
                     case 2:
-                        LocationInstructionView(tabSelected: $currentTab)
-//                            .transition(transition)
-                            .matchedGeometryEffect(id: "place", in: namespace)
-                    case 3:
                         CardInstructionView(tabSelected: $currentTab)
-//                            .transition(transition)
-                            .matchedGeometryEffect(id: "place", in: namespace)
-                    case 4:
+                    case 3:
                         HorarioInstructionView(tabSelected: $currentTab)
-//                            .transition(transition)
-                            .matchedGeometryEffect(id: "place", in: namespace)
-                    case 5:
+                    case 4:
                         MiniCardInstruction(tabSelected: $currentTab)
-//                            .transition(transition)
-                            .matchedGeometryEffect(id: "place", in: namespace)
-                    case 6:
+                    case 5:
                         WeatherView()
                     default:
                         WeatherView()
                     }
                 }
-                .gesture(
-                    DragGesture()
-                        .updating($swipeOffset) { value, state, _ in
-                            state = value.translation.width
-                        }
-                        .onEnded { value in
-                            let threshold = UIScreen.main.bounds.width / 2
-                            if -value.translation.width > threshold {
-                                withAnimation(.default)
-                                {
-                                    if currentTab < 6 {
-                                        currentTab = currentTab + 1
-                                    }
-                                }
-                            }
-                        }
-                )
-                
             }
+            
         }.onAppear{
+            lm.requestLocationAlways()
             if (lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse){
                 onBoarding = false
             }
+            print(currentTab)
         }
-        
     }
         
 }

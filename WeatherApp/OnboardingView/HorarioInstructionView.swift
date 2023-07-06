@@ -264,14 +264,19 @@ struct HorarioInstructionView: View {
                     }
                     .font(.system(size: 8))
                     
-                    Text("Pular")
-                        .foregroundColor(.white)
-                        .bold()
-                        .onTapGesture {
-                            tabSelected = 8
-                        }
-                    
-
+                    HStack {
+                        Text("Pular")
+                            .foregroundColor(.white)
+                            .bold()
+                            .onTapGesture {
+                                tabSelected = 8
+                            }
+                        
+                        Spacer()
+                        
+                        NextButton(increaseValue: $tabSelected)
+                    }
+                    .padding(.horizontal)
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth:.infinity)

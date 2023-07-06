@@ -230,29 +230,30 @@ struct LocationBlurView: View {
             
             VStack(alignment: .center, spacing: 8) {
                 
-                Spacer()
                 
-                Image(systemName: "mappin.and.ellipse")
-                    .font(.system(size: 48)) //Para alterar o tamanho de um Símbolo do SF Symbols
-                    .frame(width: 64, height: 64)
-                    .foregroundColor(.gray)
-                    .padding(.top, 64)
-
-                Text("Localização")
-                    .font(.title2)
-                    .bold() //Para deixar uma fonte do sistema em Bold
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.bottom, 8)
+                VStack {
+                    Image(systemName: "mappin.and.ellipse")
+                        .font(.system(size: 48)) //Para alterar o tamanho de um Símbolo do SF Symbols
+                        .frame(width: 64, height: 64)
+                        .foregroundColor(.gray)
+                        .padding(.top, 32)
+                    
+                    Text("Localização")
+                        .font(.title)
+                        .bold() //Para deixar uma fonte do sistema em Bold
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.bottom, 8)
+                }
+                
+                Spacer()
                 
                 Text("Precisamos da sua localização para \n oferecer uma melhor previsão.")
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .center)
-                
-                
                 
                 ZStack(alignment: .center) {
                     
@@ -268,32 +269,10 @@ struct LocationBlurView: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .padding(16)
-                    
-
-
                 }
-                
-                Text("Entendi")
-                    .bold()
-                    .foregroundColor(.white)
-                    .onTapGesture {
-                        lm.requestLocationAlways()
-                        tabSelected = 1
-                    }
-                
-                Spacer()
-                    .frame(height: 24)
-
-
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black.opacity(0.5))
+            .background(Color.black.opacity(0.65))
         }
-        
-        
-        
-        
     }
-    
-    
 }
