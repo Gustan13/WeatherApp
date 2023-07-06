@@ -3,8 +3,7 @@ import SwiftUI
 struct LocationBlurView: View {
     
     @Binding var tabSelected: Int
-    @StateObject var lm = LocationManager()
-    
+    @StateObject var lm : LocationManager
     
     var body: some View {
         ZStack(){
@@ -273,6 +272,10 @@ struct LocationBlurView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.black.opacity(0.65))
+            .onAppear
+            {
+                lm.requestLocationAlways()
+            }
         }
     }
 }
