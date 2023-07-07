@@ -44,9 +44,6 @@ struct WeatherView: View {
     
     @State var hour : Int!
     
-//    @State var dayHour : Int = UserDefaults.standard.integer(forKey: "dayHour")
-//    @State var eveningHour : Int = UserDefaults.standard.integer(forKey: "eveningHour")
-//    @State var nightHour : Int = UserDefaults.standard.integer(forKey: "nightHour")
     @AppStorage("dayHour") var dayHour : Int = 7
     @AppStorage("eveningHour") var eveningHour : Int = 16
     @AppStorage("nightHour") var nightHour : Int = 22
@@ -81,7 +78,6 @@ struct WeatherView: View {
                         .matchedGeometryEffect(id: "date3", in: namespace)
                         .font(
                             Font.system(size: 64)
-//                                    .weight(.bold)
                         )
                         .font(.largeTitle)
                         .foregroundColor(.white)
@@ -92,7 +88,6 @@ struct WeatherView: View {
                     
                     Spacer()
                 }
-//                .matchedGeometryEffect(id: "date", in: namespace)
             } else {
                 HStack() {
                     Text("Hoje, \(dateString)")
@@ -208,6 +203,9 @@ struct WeatherView: View {
         .matchedGeometryEffect(id: "gradient", in: namespace)
         .onAppear
         {
+            lm.requestLocationAlways()
+            UserDefaults.standard.setValue(false, forKey: "onBoarding")
+            
             startUpdatingDate()
             
             withAnimation(.spring())
@@ -245,10 +243,13 @@ struct WeatherView: View {
                     nightActive1 = true
                 }
             }
-        }
-        .task {
             get_weather_info(dayHour, eveningHour, nightHour)
         }
+//        .task {
+//            while !hasRecieved {
+//                get_weather_info(dayHour, eveningHour, nightHour)
+//            }
+//        }
         .alert(isPresented: $weatherKitError)
         {
             Alert(title: Text("Error"), message: Text("WeatherKit could not be accessed."), dismissButton: .default(Text("Ok")))
@@ -286,12 +287,9 @@ struct WeatherView: View {
             
             if (lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse)
             {
-                print("in")
                 weatherKitError = await wm.get_weather(lat: lm.lastLocation?.coordinate.latitude ?? -25, long: lm.lastLocation?.coordinate.longitude ?? -49, dayHour, eveningHour, nightHour)
                 lm.stop()
-                print("flag")
             }
-            print("Hello")
         }
     }
 }

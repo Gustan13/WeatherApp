@@ -13,35 +13,34 @@ struct ContentView: View {
     @StateObject var lm = LocationManager()
     
     @AppStorage("onBoarding") var onBoarding : Bool = true
+    @State var canContinue : Bool = false
     
     @Namespace var namespace
     
     var body: some View {
         
         ZStack(){
-            if !onBoarding {
-                WeatherView()
-            }
-            else {
-                switch(currentTab){
-                case 1:
-                    if lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse
-                    {
-                        LocationInstructionView(tabSelected: $currentTab, lm: lm)
-                    } else {
-                        LocationBlurView(tabSelected: $currentTab, lm: lm)
+            if lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse {
+                if onBoarding {
+                    switch(currentTab){
+                    case 1:
+                        LocationInstructionView(tabSelected: $currentTab)
+                    case 2:
+                        CardInstructionView(tabSelected: $currentTab)
+                    case 3:
+                        HorarioInstructionView(tabSelected: $currentTab)
+                    case 4:
+                        MiniCardInstruction(tabSelected: $currentTab)
+                    case 5:
+                        WeatherView()
+                    default:
+                        WeatherView()
                     }
-                case 2:
-                    CardInstructionView(tabSelected: $currentTab)
-                case 3:
-                    HorarioInstructionView(tabSelected: $currentTab)
-                case 4:
-                    MiniCardInstruction(tabSelected: $currentTab)
-                case 5:
-                    WeatherView()
-                default:
+                } else {
                     WeatherView()
                 }
+            } else {
+                LocationBlurView(tabSelected: $currentTab, lm: lm)
             }
         }
     }

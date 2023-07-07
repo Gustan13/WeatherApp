@@ -283,7 +283,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 527C0FCA2A431C5600C1138D /* Build configuration list for PBXProject "WeatherApp" */;
+			buildConfigurationList = 527C0FCA2A431C5600C1138D /* Build configuration list for PBXProject "Nimbo" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -648,7 +648,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		527C0FCA2A431C5600C1138D /* Build configuration list for PBXProject "WeatherApp" */ = {
+		527C0FCA2A431C5600C1138D /* Build configuration list for PBXProject "Nimbo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				527C0FF12A431C5700C1138D /* Debug */,

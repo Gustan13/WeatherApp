@@ -10,7 +10,7 @@ import SwiftUI
 struct LocationInstructionView: View {
         
     @Binding var tabSelected: Int
-    @StateObject var lm : LocationManager
+//    @StateObject var lm : LocationManager
         
     var body: some View {
         ZStack(){
@@ -302,11 +302,11 @@ struct LocationInstructionView: View {
             }
             .padding(16)
         }
-        .onAppear {
-            if lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse
-            {
-                tabSelected = 5
-            }
-        }
+//        .onAppear {
+//            if lm.locationStatus == .authorizedAlways || lm.locationStatus == .authorizedWhenInUse
+//            {
+//                tabSelected = 5
+//            }
+//        }
     }
 }

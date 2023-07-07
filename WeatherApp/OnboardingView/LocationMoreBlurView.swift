@@ -4,7 +4,6 @@ struct LocationMoreBlurView: View {
     
     @Binding var tabSelected: Int
     
-    
     var body: some View {
         
         ZStack(){
