@@ -97,7 +97,6 @@ struct CardView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                             .frame(width: 100, height: 15, alignment: .leading)
-                            .matchedGeometryEffect(id: "period", in: namespace)
                         
                         Spacer()
                         
@@ -131,7 +130,6 @@ struct CardView: View {
 
                         Spacer()
                     }
-                    .matchedGeometryEffect(id: "quote", in: namespace)
                     
                     Spacer()
                     
@@ -159,7 +157,6 @@ struct CardView: View {
                                 .foregroundColor(.black)
                         }
                     }
-                    .matchedGeometryEffect(id: "info", in: namespace)
                     
                     Divider()
                         .padding(.bottom, 8)
@@ -220,7 +217,6 @@ struct CardView: View {
                         .font(.body)
                         .foregroundColor(.white)
                         .frame(width: 100, height: 15, alignment: .leading)
-                        .matchedGeometryEffect(id: "period", in: namespace)
                     
                     HStack {
                         Text(make_quote(weatherModel))
@@ -230,7 +226,6 @@ struct CardView: View {
                             .multilineTextAlignment(.leading)
                         Spacer()
                     }
-                    .matchedGeometryEffect(id: "quote", in: namespace)
                     
                     HStack() {
                         
@@ -255,7 +250,6 @@ struct CardView: View {
                                 .foregroundColor(.white)
                         }
                     }
-                    .matchedGeometryEffect(id: "info", in: namespace)
                 }
             }
         }
@@ -264,11 +258,11 @@ struct CardView: View {
         .background(active == false ? (.white.opacity(0.1)) : (.white))
         .cornerRadius(8)
         .overlay(
-        RoundedRectangle(cornerRadius: 8)
-            .stroke(.white.opacity(0.5), lineWidth: active == true ? (0) : (2)))
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.white.opacity(0.5), lineWidth: active == true ? (0) : (2))
+        )
         .shadow(color: .black.opacity(0.1), radius: active == true ? (4) : (0), y: active == true ? (8) : (0))
-        .onAppear
-        {
+        .onAppear {
             print("\(date), bro")
         }
     }
